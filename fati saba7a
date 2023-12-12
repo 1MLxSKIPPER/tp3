@@ -1,0 +1,32 @@
+board = [['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+         ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']]
+def display_board(board):
+    for row in board:
+        print(" ".join(row))
+def get_user_input():
+    user_input = input("Enter your move (e.g. a2a4): ")
+    if len(user_input) != 4:
+        print("Invalid input")
+        return None
+    return user_input
+def move_piece(board, src, dest):
+    x_src, y_src = int(src[1]) - 1, ord(src[0]) - ord('a')
+    x_dest, y_dest = int(dest[1]) - 1, ord(dest[0]) - ord('a')
+    board[x_dest][y_dest] = board[x_src][y_src]
+    board[x_src][y_src] = ' '
+def play_game():
+    while True:
+        display_board(board)
+        user_input = get_user_input()
+        if not user_input:
+            continue
+        move_piece(board, user_input[:2], user_input[2:])
+
+if __name__ == "__main__":
+    play_game()
